@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="../../CSS/personagem-perfil.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../CSS/style.css">
+
+    <link rel="icon" type="image/png" href="../../img/aba.png">
+    <link rel="icon" href="../../img/icon.ico" type="image/x-icon">
+    <title>Ash Williams - Dead by Daylight</title>
+</head>
+
+<body data-personagem="ash">
+    <div>
+        <div class="header-full-width-wrapper">
+            <div class="container">
+                <header class="py-4 d-flex flex-wrap align-items-center justify-content-between">
+
+                    <a href="../../HTML/index.html"
+                        class="d-flex align-items-center mb-0 text-white text-decoration-none">
+                        <img src="../../img/icon.ico" alt="The Fog Logo" width="40" height="32" class="me-2">
+                        <span class="fs-4">The Fog</span>
+                    </a>
+
+                    <button id="btn-menu" type="button" aria-expanded="false">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <ul class="nav nav-pills" id="menu">
+                        <li class="nav-item"><a href="../../HTML/jogo.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="../../HTML/killers.html" class="nav-link">Killers</a></li>
+                        <li class="nav-item"><a href="../../HTML/survival.html" class="nav-link  active"
+                                aria-current="page">Survivors</a></li>
+                    </ul>
+
+                </header>
+            </div>
+        </div>
+
+        <div class="personagem-container">
+            <div class="personagem-topo">
+                <img src="../../img/surv-perfil/ash.png" alt="Foto Ashley J. Williams" class="personagem-foto">
+                <div>
+                    <h1>Ash Williams</h1>
+                    <ul>
+                        <li>Genero: Masculino</li>
+                        <li>Origem: Americano</li>
+                        <li>DLC: Ash vs Evil Dead</li>
+                        <li>Dublador: Bruce Campbell</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <h2>História do Personagem</h2>
+                
+                <p>Ash Williams é um homem que, décadas atrás, libertou um mal antigo ao ler o Necronomicon (Livro dos
+                    Mortos) em uma cabana, forçando-o a matar seus amigos possuídos e a serrar a própria mão. Após
+                    trinta anos fugindo de seu destino, ele acidentalmente desperta o mal novamente. Com a ajuda de seus
+                    colegas de trabalho, Pablo e Kelly, e mais tarde de sua filha perdida, Brandy, Ash assume seu papel
+                    de salvador. Após uma batalha climática, ele é gravemente ferido e transportado para o futuro pelos
+                    Cavaleiros da Suméria.</p>
+
+                <p>A história recomeça com Ash acordando nesse futuro desconhecido, desorientado e de ressaca. Ele ouve
+                    um canto sedutor e o segue, vestindo apenas sua cueca, até um vestiário público. Lá, ele encontra
+                    uma mulher nua que se assemelha a Linda, uma antiga paixão do colégio. Ele se aproxima dela,
+                    questionando sua presença e o paradeiro de seus amigos e filha.</p>
+
+                <p>A mulher se revela um demônio disfarçado, envelhecendo décadas instantaneamente e atacando-o com uma
+                    lâmina escondida. Estando quase nu e desarmado, Ash é rapidamente dominado, ferido e estrangulado.
+                    Em um ato de desespero, ele alcança uma saboneteira, esguicha líquido nos olhos do demônio e
+                    consegue se libertar, pegando a faca no processo.</p>
+
+                <p>Quando estava prestes a matá-la, Ash decide fazer um acordo: ele a poupará se ela o enviar de volta
+                    para seus amigos. O demônio concorda e inicia um encantamento, mas a pronúncia terrível de Ash faz o
+                    feitiço dar errado. Um redemoinho caótico de água suja e detritos explode dos canos, sugando o
+                    demônio. Ash tenta se segurar, mas também é puxado e aterrissa de cara no "Território da Entidade".
+                    Ele se vê misteriosamente vestido, mas percebe que está sem sua espingarda e motosserra, ouvindo um
+                    grito ao longe.</p>
+            </div>
+
+            <div class="personagem-habilidades">
+                <h2>Habilidades</h2>
+                <div class="habilidades-lista">
+                    <img src="../../img/perks/surv/ash/perk1.gif" alt="Icone Bate e Volta" class="habilidade-img"
+                        data-hab="1">
+                    <img src="../../img/perks/surv/ash/perk2.gif" alt="Icone Apertando os Cintos" class="habilidade-img"
+                        data-hab="2">
+                    <img src="../../img/perks/surv/ash/perk3.gif" alt="Icone Fervor do Homem" class="habilidade-img"
+                        data-hab="3">
+                </div>
+                <div class="habilidade-descricao" id="descricao-hab"></div>
+            </div>
+        </div>
+
+        <script src="../../JS/responsive.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
+
+        <script src="../../JS/perfil-surv.js"></script>
+    </div>
+</body>
+
+</html>

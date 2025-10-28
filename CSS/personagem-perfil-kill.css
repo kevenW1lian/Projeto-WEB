@@ -1,0 +1,224 @@
+:root {
+    --max-content-width: 1000px;
+    --page-padding: 16px;
+}
+
+body {
+    background: #0f0f0e;
+    background-color: #0f0f0e;
+    font: 16px/1.4 Arial, sans-serif;
+    margin: 0;
+    color: #222;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+    padding: 6px 10px;
+}
+
+p {
+    padding: 10px 8px;
+    max-width: var(--max-content-width);
+    display: block;
+    margin: 0.6rem auto;
+}
+
+h2{
+  padding-top: 50px;
+}
+
+
+/* Conteudo do body */
+
+#conteudo {
+    background-color: #000000;
+    color: white;
+    padding: 24px var(--page-padding);
+    width: 100%;
+    margin: 0 0 32px 0;
+    text-align: justify; 
+}
+
+.img-header {
+    width: 500px;
+    max-width: 40vw;
+    height: auto;
+}
+
+.personagem-container{
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 24px;
+    background: #181818;
+    border-radius: 12px;
+    color: #fff;
+}
+
+.personagem-topo{
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.personagem-foto {
+    width: 320px;
+    height: auto;
+    border-radius: 8px;
+    margin-left: 16px;
+    box-shadow: 0 2px 8px #0008;
+}
+
+.personagem0-info{
+    flex: 1;
+    margin-top: 12px;
+}
+
+.personagem0-info h1{
+    margin-bottom: 12px;
+}
+
+.personagem-info ul{
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.personagem-historia{
+    margin-top: 32px;
+}
+
+.personagem-habilidades{
+    margin-top: 40px;
+}
+
+.habilidades-lista{
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.habilidade-img{
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border 0.2s;
+}
+
+.img-historia{
+    width: 600px;
+    margin-left: 120px;
+  }
+
+.habilidade-descricao{
+    background: #222;
+    padding: 16px;
+    border-radius: 8px;
+    min-height: 60px;
+    text-align: left;
+    display: none; 
+}
+
+.habilidade-descricao.active {
+    display: block;
+}
+
+/* conteudo do body fim */
+
+
+/* --- Responsividade --- */
+
+@media (max-width: 800px) {
+    .img-header {
+        width: 140px;
+    }
+}
+
+@media (max-width: 1000px) {
+  .personagem-container {
+    max-width: 98vw;
+    padding: 18px;
+  }
+  .personagem-topo {
+    gap: 16px;
+  }
+  .personagem-foto {
+    width: 160px;
+    margin-left: 4px;
+  }
+}
+
+@media (max-width: 700px) {
+  .personagem-container {
+    padding: 18px;
+    border-radius: 0;
+  }
+  .personagem-topo {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .personagem-foto {
+    width: 520px;
+    margin: 0 auto 8px auto;
+    display: block;
+  }
+  .personagem-topo ul {
+    padding-left: 16px;
+  }
+  .habilidades-lista {
+    flex-direction: line;
+    align-items: center;
+    gap: 12px;
+  }
+  .habilidade-img {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 15px;
+    }
+
+    #conteudo {
+        padding: 12px;
+    }
+
+  .personagem-container {
+    margin: 0;
+    padding: 0;
+  }
+  .personagem-foto {
+    
+    width: 200px;
+  }
+  .habilidade-img {
+    width: 80px;
+    height: 80px;
+  }
+  .icones {
+    gap: 8px;
+  }
+  .icone-img {
+    width: 40px;
+    height: 40px;
+  }
+  .icone-nome {
+    font-size: 0.85rem;
+  }
+}
+
+@media (min-width: 801px) {
+    #conteudo p,
+    #conteudo h2.titulo {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="../../CSS/personagem-perfil-kill.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../CSS/style.css">
+
+    <link rel="icon" type="image/png" href="../../img/aba.png">
+    <link rel="icon" href="../../img/icon.ico" type="image/x-icon">
+    <title>A Artista - Dead by Daylight</title>
+</head>
+
+<body data-personagem="artista">
+    <div>
+        <div class="header-full-width-wrapper">
+            <div class="container">
+                <header class="py-4 d-flex flex-wrap align-items-center justify-content-between">
+
+                    <a href="../../HTML/index.html"
+                        class="d-flex align-items-center mb-0 text-white text-decoration-none">
+                        <img src="../../img/icon.ico" alt="The Fog Logo" width="40" height="32" class="me-2">
+                        <span class="fs-4">The Fog</span>
+                    </a>
+
+                    <button id="btn-menu" type="button" aria-expanded="false">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <ul class="nav nav-pills" id="menu">
+                        <li class="nav-item"><a href="../../HTML/jogo.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="../../HTML/killers.html" class="nav-link active"
+                                aria-current="page">Killers</a></li>
+                        <li class="nav-item"><a href="../../HTML/survival.html" class="nav-link">Survivors</a></li>
+                    </ul>
+
+                </header>
+            </div>
+        </div>
+
+        <div class="personagem-container">
+            <div class="personagem-topo">
+                <img src="../../img/killer-perfil/espectro.png" alt="Foto O Espectro" class="personagem-foto">
+                <div>
+                    <h1>O Espectro</h1>
+                    <ul>
+                        <li>Nome: Philip Ojomo</li>
+                        <li>Genero: Masculino</li>
+                        <li>Origem: Africano</li>
+                        <li>Poder: Sino das Lamentações</li>
+                        <li>Arma: Crânio de Azarov</li>
+                        <li>Velocidade de Movimento: 115% | 4.6m/s (Visível)</li>
+                        <li>Velocidade de Movimento Alt: 126% | 5.04m/s (Invisível)</li>
+                        <li>Raio de Terror: 32 metros</li>
+                        <li>DLC: Personagem Padrão</li>
+                        <li>Dublador: Filip Ivanovic</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <h2>História do Personagem</h2>
+
+                <p>Philip Ojomo veio para esse país sem nada mais que esperança para um novo começo. Ele ficou feliz
+                    quando um emprego no Ferro Velho Autohaven foi oferecido a ele. Um pequeno Ferro Velho onde
+                    policiais subornados viravam os olhos para os negócios obscuros que aconteciam por lá.</p>
+
+                <p>Ojomo não ligou. Ele viu atividades criminais de perto na sua terra natal e desde que ele não se
+                    envolvesse, ele deixava as coisas fluírem. Ele somente consertava carros e controlava o triturador.
+                    Algo que ele fazia muito bem. Um carro entrava e um pequeno cubo metálico saía.</p>
+
+
+                <img src="../../img/ilustra/espectro.jpg" alt="O Espectro" class="img-historia">
+
+                <p>Não foi até um dia sombrio que ele, por acidente, viu um pouco de sangue saindo de um dos carros não
+                    triturados. Quando ele abriu o porta-malas ele achou um homem jovem, amordaçado e com mãos amarradas
+                    com olhos cheios de pânico. Ojomo libertou o homem que correu dez passos antes do chefe de Ojomo
+                    pará-lo e cortar sua garganta. Como Ojomo queria respostas, explicaram a ele que ele não era nada
+                    mais que um simples executor já que mais ou menos todos carro tinha uma alma já que esse era o
+                    "serviço" que o ferro velho fazia para certos "clientes".</p>
+
+                <p>Ojomo perdeu a cabeça e foi balístico. Ele jogou se chefe no triturador e deixou-o comprimir
+                    lentamente, quando a cabeça saiu, Ojomo agarrou-a e empurrou a cabeça e a coluna vertebral para fora
+                    do corpo. Então ele saiu de lá e nunca mais foi visto.</p>
+
+            </div>
+
+
+            <div class="personagem-habilidades">
+                <h2>Habilidades</h2>
+                <div class="habilidades-lista">
+                    <img src="../../img/perks/killer/espectro/poder.png" alt="Icone Imagem do poder"
+                        class="habilidade-img" data-hab="1">
+                    <img src="../../img/perks/killer/espectro/perk1.gif" alt="Icone Predador" class="habilidade-img"
+                        data-hab="2">
+                    <img src="../../img/perks/killer/espectro/perk2.gif" alt="Icone Cão de caça" class="habilidade-img"
+                        data-hab="3">
+                    <img src="../../img/perks/killer/espectro/perk3.gif" alt="Icone Nascido das Sombras"
+                        class="habilidade-img" data-hab="4">
+                    <img src="../../img/perks/killer/memento.png" alt="Icone Memento Mori" class="habilidade-img"
+                        data-hab="5">
+                </div>
+                <div class="habilidade-descricao" id="descricao-hab"></div>
+            </div>
+        </div>
+
+        <script src="../../JS/responsive.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
+
+        <script src="../../JS/perfil-kill.js"></script>
+</body>
+
+</html>
