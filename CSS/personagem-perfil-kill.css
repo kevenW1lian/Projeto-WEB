@@ -31,7 +31,7 @@ h2{
 }
 
 
-/* Conteudo do body */
+/* --- conteudo do body --- */
 
 #conteudo {
     background-color: #000000;
@@ -110,6 +110,10 @@ h2{
     transition: border 0.2s;
 }
 
+.habilidade-img.selecao{
+   border: 2px dashed purple;
+}
+
 .img-historia{
     max-width: 100%;
     height: auto;
@@ -131,10 +135,10 @@ h2{
     display: block;
 }
 
-/* conteudo do body fim */
+/* --- conteudo do body fim --- */
 
 
-/* --- Responsividade --- */
+/* --- responsividade --- */
 
 @media (max-width: 800px) {
     .img-header {

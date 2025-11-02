@@ -1,8 +1,6 @@
 // SCRIPT DAS HABILIDADES
 
-// #region
-
-const habilidadesPersonagens = {
+const habilidadesPersonagens = { // constante que vai servir como uma especie de "banco de dados" guardando as informações dos personagens para que as funções a frente possam recuperar e retornar no html
     ash: {
         1: `
         <h2>Bate e Volta</h2>
@@ -112,7 +110,7 @@ const habilidadesPersonagens = {
         font-weight:bold;">Obsessão</span> por partida.</p>
         `,
 
-        3:`
+        3: `
         <h2>Ataque Decisivo</h2>
 
         <p>Usando o que estivar na mão, você apunhala seu agressor em uma tentativa de escapar.</p>
@@ -178,7 +176,7 @@ const habilidadesPersonagens = {
         estão ativos no mesmo Totem de Bênção.</p>
         `,
 
-        3:`
+        3: `
         <h2>Bênção: Passos Sombrios</h2>
 
         <p>Uma dádiva que esconde a verdade. Aperte e segure o botão de habilidade proximo a um Totem vazio 
@@ -287,8 +285,8 @@ const habilidadesPersonagens = {
         <p>Artimanha só pode ser ativado uma vez a cada <span style="color:#ffeb3b;font-weight:bold;">60</span>/<span
         style="color:#4caf50; font-weight:bold;">50</span>/<span style="color:#9c27b0; font-weight:bold;">40</span> segundos.</p>
         `,
-        
-        3:`
+
+        3: `
         <h2>Disputa de Forças</h2>
 
         <p>Você nunca desistiu e não vai começar agora.</p>
@@ -306,38 +304,35 @@ const habilidadesPersonagens = {
     }
 };
 
-// #endregion
+const personagem = document.body.getAttribute('data-personagem'); // cria uma constante personagem que vai receber o valor do atributo data-personagem que está no body do html
+const habilidades = habilidadesPersonagens[personagem]; // cria a constante personagem que vai receber a informação da constante habilidadesPersonagens que foi criada no começo e vai usar a const de personagem criada acima no [personagem] para filtrar as informações dentro do "banco de dados"
 
+const imgs = document.querySelectorAll('.habilidade-img'); // pega todos os elemetos que estao no html que tenha a classe habilidade-img
+const desc = document.getElementById('descricao-hab'); // pega o id da div no html para saber aonde deve ser posto a descrição de habilidade
 
-const personagem = document.body.getAttribute('data-personagem');
-const habilidades = habilidadesPersonagens[personagem];
+if (imgs.length && desc && habilidades) { // primeiro verifica a quantidade de itens com o atributo foi encontrado para saber ser é truthy ou falsy, depois checa se a div de descrição foi encontrada e por fim se existe as habilidades do personsagem especifico no "banco de dados" e so vai entrar na condição se todas as 3 forem verdadeiras
 
-const imgs = document.querySelectorAll('.habilidade-img');
-const desc = document.getElementById('descricao-hab');
+    imgs.forEach(img => { // informa que para cada item da lista de imgs que foram encontrados deve ser feito a seguinte função
+        img.addEventListener('click', function () { //vai esperar um evento de click em uma das imagens para ativar uma função
 
-if (imgs.length && desc && habilidades) {
-    
-    imgs.forEach(img => {
-        img.addEventListener('click', function () {
+            const jaSelecionado = img.classList.contains('selecao'); // verifica se a img que foi clicada sem a classe selecao e pega esse retorno e armazena na variavel criada
 
-            const jaSelecionado = img.classList.contains('selecao');
+            if (jaSelecionado) { // verifica se a jaSelecionado é true, pq se for significa que ela ja está selecionada e o usuario deseja recolher, entao o seguinte vai acontecer:
 
-            if (jaSelecionado) {
-               
-                img.classList.remove('selecao');
-                desc.classList.remove('active');
+                img.classList.remove('selecao'); // remove a class selecao do css para tirar o indicador de que a imagem esta visivel
+                desc.classList.remove('active'); // e remove a class que faz a caixa onde fica a descrição ficar visivel
 
-            } else {
+            } else { // caso o if seja falso, é pq a jaSelecionado retornou false entao a imagem nao foi selecionada e nao esta visivel entao ela vai ser posta agora 
 
-                imgs.forEach(i => i.classList.remove('selecao'));
-                img.classList.add('selecao'); 
-                const hab = img.getAttribute('data-hab');
-                desc.innerHTML = habilidades[hab];
-                desc.classList.add('active');
+                imgs.forEach(i => i.classList.remove('selecao')); // remove a classe selecao de todas as imgs da lista
+                img.classList.add('selecao'); // agora adiciona selecao apenas na img que foi clicada pelo usuario
+                const hab = img.getAttribute('data-hab'); // agora ele cria uma const para armazenar o valor da data-hab que esta informado no html
+                desc.innerHTML = habilidades[hab]; // pega a const habilidades que filtrou e ja sabe qual é o personagem da pagina e usa a const hab que tem armazenado o valor da habilidade clicada e pega o texto dela no "banco de dados" acima
+                desc.classList.add('active'); // e por fim adiciona a classe active que faz com que fique visivel a caixa de texto onde a descrição da habilidade vai ficar
             }
 
-            desc.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-            
+            desc.scrollIntoView({ behavior: 'smooth', block: 'nearest' }) // faz com que a tela role para baixo quando o usuario clicar em alguma das habilidades para que a caixa de testo fique visivel
+
         });
     });
 }

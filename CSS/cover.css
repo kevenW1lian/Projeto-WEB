@@ -33,12 +33,11 @@ body {
 
 body::before {
   content: '';
-  position: absolute; /*Posiciona o overlay sobre a imagem*/
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  /*'0.5' para um valor entre 0 (transparente) e 1 (totalmente opaco). */
   background: rgba(0, 0, 0, 0.7);
   z-index: -1;
 }
@@ -142,4 +141,16 @@ body::before {
       }
       .bd-mode-toggle .dropdown-menu .active .bi {
         display: block !important;
+      }
+
+      header a {
+        text-decoration: none !important;
+        border: none !important;
+        border-bottom: none !important;
+      }
+
+      header a h3 {
+        text-decoration: none !important;
+        border: none !important;
+        border-bottom: none !important;
       }

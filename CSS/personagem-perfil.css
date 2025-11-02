@@ -30,17 +30,7 @@ h2{
   padding-top: 50px;
 }
 
-/* Conteudo do body */
-
-#conteudo {
-    background-color: #000000;
-    color: white;
-    padding: 24px var(--page-padding);
-    width: 100%;
-    margin: 0 0 32px 0;
-    text-align: justify; 
-}
-
+/* --- conteudo do body --- */
 .img-header {
     width: 500px;
     max-width: 40vw;
@@ -108,6 +98,10 @@ h2{
     transition: border 0.2s;
 }
 
+.habilidade-img.selecao{
+   border: 2px dashed purple;
+}
+
 .habilidade-descricao{
     background: #222;
     padding: 16px;
@@ -121,10 +115,10 @@ h2{
     display: block;
 }
 
-/* conteudo do body fim */
+/* --- conteudo do body fim --- */
 
 
-/* --- Responsividade --- */
+/* --- responsividade --- */
 @media (max-width: 800px) {
     .img-header {
         width: 140px;
