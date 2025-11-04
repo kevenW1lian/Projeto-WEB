@@ -111,7 +111,7 @@ h2{
 }
 
 .habilidade-img.selecao{
-   border: 2px dashed purple;
+   border: 2px groove white;
 }
 
 .img-historia{
@@ -125,10 +125,15 @@ h2{
 .habilidade-descricao{
     background: #222;
     padding: 16px;
+    padding-top: 8px;
     border-radius: 8px;
     min-height: 60px;
     text-align: left;
     display: none; 
+}
+
+.habilidade-descricao h2{
+  padding-top: 10px;
 }
 
 .habilidade-descricao.active {
