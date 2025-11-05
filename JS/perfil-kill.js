@@ -137,7 +137,7 @@ const habilidadesPersonagens = { // constante que vai servir como uma especie de
                 terão sua Aura revelado a você por <span style="color:#FF8800; font-weight:bold;">5 segundos</span>.</li>
             </ul>
         `,
-        
+
         4: `
             <h2>A Morte de Franklin</h2>
 
@@ -162,7 +162,7 @@ const habilidadesPersonagens = { // constante que vai servir como uma especie de
         `
     },
 
-enfermeira: {
+    enfermeira: {
         1: `
             <h2>Último Suspiro de Spencer</h2>
 
@@ -219,7 +219,7 @@ enfermeira: {
             </ul>
         `,
 
-         5: `
+        5: `
             <h2>Memento Mori</h2>
 
             <img src="../../img/perks/killer/enfermeira/mori.gif" alt="Memento Mori da Artista" class="img-historia">
@@ -227,7 +227,7 @@ enfermeira: {
         `
     },
 
-   espectro: {
+    espectro: {
         1: `
             <h2>Sino das Lamentações</h2>
 
@@ -272,7 +272,7 @@ enfermeira: {
             <p>Os ganhos de Campo de Visão não se acumulam.</p>
         `,
 
-         5: `
+        5: `
             <h2>Memento Mori</h2>
 
             <img src="../../img/perks/killer/espectro/mori.gif" alt="Memento Mori da Artista" class="img-historia">
@@ -280,7 +280,7 @@ enfermeira: {
         `,
     },
 
-vilao: {
+    vilao: {
         1: `
             <h2>Salto Virulento</h2>
 
@@ -429,38 +429,147 @@ vilao: {
 
             <img src="../../img/perks/killer/vulto/mori.gif" alt="Memento Mori do Vulto" class="img-historia">
         `
-},
+    },
 };
 
-const personagem = document.body.getAttribute('data-personagem'); // cria uma constante personagem que vai receber o valor do atributo data-personagem que está no body do html
-const habilidades = habilidadesPersonagens[personagem]; // cria a constante personagem que vai receber a informação da constante habilidadesPersonagens que foi criada no começo e vai usar a const de personagem criada acima no [personagem] para filtrar as informações dentro do "banco de dados"
+const personagem = document.body.getAttribute('data-personagem'); // vai receber o valor do atributo data-personagem que esta no body do html
+const habilidades = habilidadesPersonagens[personagem]; // vai receber a informação da constante habilidadesPersonagens e filtrar pelo [personagem]
+const imgs = document.querySelectorAll('.habilidade-img'); // vai guardar uma LISTA de todos os elementos no html que têm a classe .habilidade-img
+const descContainer = document.getElementById('descricao-hab'); // cria uma constante para o container da descrição, que é a div que vai animar e aparecer
+const focoImg = document.getElementById('foco-img-hab'); // constante para o elemento <img> grande, onde a imagem em foco vai aparecer
+const focoTexto = document.getElementById('foco-texto-hab'); // constante para a div onde o texto da descrição vai ser injetado
 
-const imgs = document.querySelectorAll('.habilidade-img'); // pega todos os elemetos que estao no html que tenha a classe habilidade-img
-const desc = document.getElementById('descricao-hab'); // pega o id da div no html para saber aonde deve ser posto a descrição de habilidade
+let animacao = false; // cria uma variavel para impedir cliques enquanto uma animação estiver acontecendo
 
-if (imgs.length && desc && habilidades) { // primeiro verifica a quantidade de itens com o atributo foi encontrado para saber ser é truthy ou falsy, depois checa se a div de descrição foi encontrada e por fim se existe as habilidades do personsagem especifico no "banco de dados" e so vai entrar na condição se todas as 3 forem verdadeiras
+function animarAbertura(img) { // declara a função que vai animar a ABERTURA da caixa de texto ela precisa saber qual 'img' foi clicada
+    animacao = true; // ativa a trava, para avisar que uma animação começou
+    const hab = img.getAttribute('data-hab'); // pega o numero da habilidade guardado no atributo data-hab da imagem clicada
+    const imgSrc = img.getAttribute('src'); // pega o link da imagem clicada para sabermos qual imagem mostrar em foco
 
-    imgs.forEach(img => { // informa que para cada item da lista de imgs que foram encontrados deve ser feito a seguinte função
-        img.addEventListener('click', function () { //vai esperar um evento de click em uma das imagens para ativar uma função
+    img.classList.add('selecao'); // adiciona a classe 'selecao' na imagem pequena que foi clicada para o CSS aplicar o destaque
+    focoImg.src = imgSrc; // define o 'src' da imagem grande para ser o mesmo da imagem pequena clicada
+    focoImg.style.opacity = '0'; // deixa a imagem grande invisível por enquanto para esperar a animçao fantasma chegar
+    focoTexto.innerHTML = habilidades[hab]; // pega o texto da habilidade no "banco de dados" e coloca dentro da div de texto
+    focoTexto.style.opacity = '1'; // deixa o texto da descrição visível
+    descContainer.classList.add('active'); // adiciona a classe 'active' no container da descrição para o CSS fazer ele aparecer
 
-            const jaSelecionado = img.classList.contains('selecao'); // verifica se a img que foi clicada sem a classe selecao e pega esse retorno e armazena na variavel criada
+    descContainer.scrollIntoView({ behavior: 'smooth', block: 'center' }); // rola a pagina suavemente para que o container da descrição fique no centro da tela
 
-            if (jaSelecionado) { // verifica se a jaSelecionado é true, pq se for significa que ela ja está selecionada e o usuario deseja recolher, entao o seguinte vai acontecer:
+    requestAnimationFrame(() => { // pede ao navegador para esperar o momento certo para começar a animação
+        const currentScrollY = window.scrollY; // verifica o quanto a página já foi rolada para baixo
+        const startRect = img.getBoundingClientRect(); // mede a posição e o tamanho da imagem PEQUENA
+        const endRect = focoImg.getBoundingClientRect(); // mede a posição e o tamanho da imagem GRANDE
 
-                img.classList.remove('selecao'); // remove a class selecao do css para tirar o indicador de que a imagem esta visivel
-                desc.classList.remove('active'); // e remove a class que faz a caixa onde fica a descrição ficar visivel
+        const ghost = new Image(); // cria um novo elemento na memória que será o "fantasma"
+        ghost.src = imgSrc; // define a imagem do fantasma para ser a mesma da habilidade
+        ghost.className = 'habilidade-ghost'; // adiciona a classe CSS .habilidade-ghost no fantasma para o CSS dar o position: absolute
+        ghost.style.position = 'absolute'; // define a posição do fantasma como absolute para ele flutuar sobre a página
+        ghost.style.left = `${startRect.left}px`; // posiciona o fantasma exatamente na horizontal da imagem pequena
+        ghost.style.top = `${startRect.top + currentScrollY}px`; // posiciona o fantasma na vertical corrigindo com o scroll da página
+        ghost.style.width = `${startRect.width}px`; // define a largura do fantasma igual à da imagem pequena
+        ghost.style.height = `${startRect.height}px`; // define a altura do fantasma igual à da imagem pequena
 
-            } else { // caso o if seja falso, é pq a jaSelecionado retornou false entao a imagem nao foi selecionada e nao esta visivel entao ela vai ser posta agora 
+        document.body.appendChild(ghost); // coloca o fantasma na página HTML no body
 
-                imgs.forEach(i => i.classList.remove('selecao')); // remove a classe selecao de todas as imgs da lista
-                img.classList.add('selecao'); // agora adiciona selecao apenas na img que foi clicada pelo usuario
-                const hab = img.getAttribute('data-hab'); // agora ele cria uma const para armazenar o valor da data-hab que esta informado no html
-                desc.innerHTML = habilidades[hab]; // pega a const habilidades que filtrou e ja sabe qual é o personagem da pagina e usa a const hab que tem armazenado o valor da habilidade clicada e pega o texto dela no "banco de dados" acima
-                desc.classList.add('active'); // e por fim adiciona a classe active que faz com que fique visivel a caixa de texto onde a descrição da habilidade vai ficar
+        requestAnimationFrame(() => { // pede um novo frame agora sim para animar o fantasma que já está na tela
+            ghost.style.left = `${endRect.left}px`; // diz ao fantasma para se mover para a posição horizontal da imagem grande
+            ghost.style.top = `${endRect.top + currentScrollY}px`; // diz ao fantasma para se mover para a posição vertical da imagem grande
+            ghost.style.width = `${endRect.width}px`; // diz ao fantasma para aumentar sua largura para a da imagem grande
+            ghost.style.height = `${endRect.height}px`; // diz ao fantasma para aumentar sua altura para a da imagem grande
+            ghost.style.border = '2px solid white'; // adiciona a borda branca no fantasma durante a animação
+        });
+
+        ghost.addEventListener('transitionend', () => { // cria um ouvinte para esperar a animação do fantasma TERMINAR o transitionend
+            ghost.remove(); // quando a animação termina remove o fantasma da página
+            focoImg.style.opacity = '1'; // depois que o fantasma sumiu mostra a imagem grande REAL que estava opacidade 0
+            animacao = false; // destrava a animação permitindo novos cliques
+        });
+    });
+} 
+
+// IGUAL A FUNÇÃO DE CIMA SO QUE DESSA VEZ FAZENDO O INVERSO PARA FECHAR A ABA
+
+function animarFechamento(img) { // declara a função que vai animar o fechamento da caixa ela precisa saber qual 'img' foi clicada
+    animacao = true; // ativa a trava avisando que uma animação começou
+    const scrollY = window.scrollY; // verifica o quanto a pagina ja foi rolada para baixo
+    const startRect = focoImg.getBoundingClientRect(); // mede a posição da imagem grande
+    const endRect = img.getBoundingClientRect(); // mede a posição da imagem pequena
+
+    const ghost = new Image(); // cria um novo elemento <img> na memoria para ser o fantasma
+    ghost.src = focoImg.src; // define a imagem do fantasma ele ja começa grande
+    ghost.className = 'habilidade-ghost'; // adiciona a classe CSS .habilidade-ghost no fantasma
+    ghost.style.position = 'absolute'; // define a posição do fantasma como absolute
+    ghost.style.left = `${startRect.left}px`; // posiciona o fantasma exatamente na horizontal da imagem grande
+    ghost.style.top = `${startRect.top + scrollY}px`; // posiciona o fantasma na vertical da imagem grande corrigindo com o scroll
+    ghost.style.width = `${startRect.width}px`; // define a largura do fantasma igual à da imagem grande
+    ghost.style.height = `${startRect.height}px`; // define a altura do fantasma igual à da imagem grande
+    ghost.style.border = '2px solid white'; // o fantasma ja começa com a borda branca
+
+    document.body.appendChild(ghost); // coloca o fantasma grande na pagina
+
+    descContainer.classList.remove('active'); // remove a classe 'active' do container para o CSS fazer ele desaparecer
+    focoImg.style.opacity = '0'; // esconde a imagem grande REAL o fantasma esta no lugar dela
+
+    requestAnimationFrame(() => { // pede um frame para começar a animação de "volta"
+        ghost.style.left = `${endRect.left}px`; // diz ao fantasma para se mover para a posição horizontal da imagem pequena
+        ghost.style.top = `${endRect.top + scrollY}px`; // diz ao fantasma para se mover para a posição vertical da imagem pequena
+        ghost.style.width = `${endRect.width}px`; // diz ao fantasma para diminuir sua largura para a da imagem pequena
+        ghost.style.height = `${endRect.height}px`; // diz ao fantasma para diminuir sua altura para a da imagem pequena
+        ghost.style.border = 'none'; // remove a borda durante a animação de volta
+        ghost.style.opacity = '0'; // faz o fantasma desaparecer enquanto ele encolhe
+    });
+
+    ghost.addEventListener('transitionend', () => { // cria um ouvinte para esperar a animação do fantasma TERMINAR
+        ghost.remove(); // quando a animação termina remove o fantasma da página
+        animacao = false; // destrava a animação permitindo novos cliques
+        img.classList.remove('selecao'); // remove a classe selecao da imagem pequena
+    }); 
+}
+
+function trocarConteudo(img) { // declara a função que vai TROCAR o conteúdo quando a caixa já está aberta
+    animacao = true; // ativa a trava avisando que uma animação começou
+
+    focoImg.style.opacity = '0'; // faz a imagem grande atual desaparecer
+    focoTexto.style.opacity = '0'; // faz o texto atual desaparecer
+
+    setTimeout(() => { // cria um timer de 300ms para esperar o fade out terminar antes de trocar
+        const hab = img.getAttribute('data-hab'); // pega o data-hab da nova imagem clicada
+        const imgSrc = img.getAttribute('src'); // pega o src da nova imagem clicada
+
+        imgs.forEach(i => i.classList.remove('selecao')); // remove a classe selecao de todas as imagens pequenas
+        img.classList.add('selecao'); // adiciona a selecao apenas na nova imagem pequena clicada
+
+        focoImg.src = imgSrc; // troca a imagem grande enquanto ela ainda está invisível
+        focoTexto.innerHTML = habilidades[hab]; // troca o texto enquanto ele ainda está invisível
+
+        focoImg.style.opacity = '1'; // faz a nova imagem grande aparecer 
+        focoTexto.style.opacity = '1'; // faz o NOVO texto aparecer
+
+        descContainer.scrollIntoView({ behavior: 'smooth', block: 'center' }); // rola a página suavemente para o container 
+
+        animacao = false; // destrava a animação permitindo novos cliques
+    }, 300);
+}
+
+if (imgs.length && descContainer && focoImg && focoTexto && habilidades) { //so roda o codigo se todos os elementos principais existirem
+
+    imgs.forEach(img => { // para cada uma das imagens pequenas vai ser feito o seguinte:
+        img.addEventListener('click', function () { // adiciona um ouvinte de clique em cada imagem pequena
+
+            if (animacao) return; // se uma animação estiver rodando (animacao é true) PARE (return) e ignore o clique
+
+            const jaSelecionado = this.classList.contains('selecao'); // verifica se a imagem clicada ja tem a classe selecao
+            const caixaAberta = descContainer.classList.contains('active'); // verifica se o container da descrição ja tem a classe active (se está aberto)
+
+            if (jaSelecionado) { // SE a imagem clicada JÁ ESTAVA selecionada...
+                animarFechamento(this); // ...então o usuário quer FECHAR. Rode a função 'animarFechamento'
+
+            } else if (caixaAberta) { // SE NÃO, SE a caixa JÁ ESTAVA aberta (e o usuário clicou em outra imagem)...
+                trocarConteudo(this); // ...então o usuário quer TROCAR. Rode a função 'trocarConteudo'
+
+            } else { // SE NENHUMA das anteriores (se a caixa estava fechada)...
+                animarAbertura(this); // ...então o usuário quer ABRIR. Rode a função 'animarAbertura'
             }
-
-            desc.scrollIntoView({ behavior: 'smooth', block: 'nearest' }) // faz com que a tela role para baixo quando o usuario clicar em alguma das habilidades para que a caixa de testo fique visivel
-
         });
     });
 }
